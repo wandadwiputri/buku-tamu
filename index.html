@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buku Tamu Digital KPU Provinsi Riau</title>
+    
+    <!-- Font Inter: Standar Profesional Modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Palette Maroon Mewah - Deep Royal Burgundy */
+            --royal-maroon-dark: #1a0505; 
+            --royal-maroon-mid: #2D0407;
+            --kpu-cream: #FFF8E7;       
+            
+            /* FURNISHED GOLD: Gradasi emas metalik tempaan murni */
+            --furnished-gold: linear-gradient(145deg, #fceabb 0%, #fccd4d 25%, #d4af37 50%, #af8f2c 75%, #8c6a1a 100%);
+            --shadow-gold: 0 10px 25px rgba(140, 106, 26, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--kpu-cream); 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: var(--royal-maroon-dark); 
+            
+            /* --- PERBAIKAN OPACITY & BACKGROUND LAYERING --- */
+            background-image: 
+                radial-gradient(circle, rgba(45, 4, 7, 0.85) 0%, rgba(26, 5, 5, 1) 100%),
+                linear-gradient(135deg, rgba(45, 4, 7, 0.9) 0%, rgba(45, 4, 7, 0.9) 100%), 
+                url('background-kpu.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* --- MOTIF BATIK DENGAN OPACITY ELEGAN --- */
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 0; left: 0; width: 100%; height: 110px;
+            background-image: url('motif.png');
+            background-size: contain;
+            background-position: center bottom;
+            background-repeat: repeat-x;
+            opacity: 0.1; /* Transparan halus agar tidak menabrak teks */
+            z-index: 0;
+            pointer-events: none;
+            filter: grayscale(1) brightness(1.5);
+        }
+
+        /* --- HEADER --- */
+        .header {
+            position: absolute;
+            top: 40px; left: 50px;
+            display: flex; align-items: center; gap: 20px;
+            z-index: 2;
+        }
+        .header img { width: 75px; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.6)); }
+        .header-text h2 { 
+            font-size: 1.4rem; 
+            background: var(--furnished-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1; font-weight: 900; 
+            letter-spacing: -0.5px;
+        }
+        .header-text span { color: var(--kpu-cream); font-weight: 300; font-size: 0.95rem; letter-spacing: 2px; }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            text-align: center;
+            z-index: 1;
+            padding: 0 20px;
+            animation: fadeIn 1.2s ease-out;
+        }
+        
+        .center-icon { 
+            font-size: 5.5rem; 
+            background: var(--furnished-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+        }
+
+        .welcome-text { 
+            font-size: 1.6rem; 
+            font-weight: 300; 
+            margin-bottom: 8px; 
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .title { 
+            font-size: 3.8rem; 
+            margin-bottom: 50px; 
+            font-weight: 900; 
+            line-height: 1; 
+            letter-spacing: -2px;
+            background: var(--furnished-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 10px 25px rgba(0,0,0,0.6));
+        }
+
+        /* TOMBOL UTAMA FURNISHED GOLD */
+        .btn-primary {
+            background: var(--furnished-gold);
+            color: #1a0505; 
+            font-size: 1.15rem; font-weight: 800;
+            padding: 24px 65px; border-radius: 14px;
+            border: none;
+            cursor: pointer; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 2px 2px rgba(255,255,255,0.5);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+        }
+        .btn-primary:hover { 
+            transform: translateY(-8px) scale(1.02); 
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* --- QUICK LINKS (ICON GOLD & TEXT CREAM) --- */
+        .quick-links {
+            display: flex; justify-content: center; gap: 80px;
+        }
+        .link-item {
+            color: var(--kpu-cream);
+            text-decoration: none; 
+            transition: 0.4s;
+            display: flex; flex-direction: column; align-items: center; gap: 15px;
+        }
+        .link-item i { 
+            font-size: 2.5rem; 
+            background: var(--furnished-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: 0.4s;
+        }
+        .link-item span { 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--kpu-cream);
+            opacity: 0.7;
+        }
+        .link-item:hover { transform: translateY(-10px); }
+        .link-item:hover i { transform: scale(1.2); filter: brightness(1.2); }
+        .link-item:hover span { opacity: 1; color: #fff; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 2, 2, 0.98); backdrop-filter: blur(20px);
+            z-index: 100; justify-content: center; align-items: center;
+        }
+
+        .floating-card {
+            width: 90%; max-width: 580px; height: 88vh;
+            background: var(--kpu-cream); border-radius: 30px;
+            overflow: hidden; box-shadow: 0 50px 120px rgba(0,0,0,0.9);
+            display: flex; flex-direction: column;
+        }
+
+        #thank-you-box {
+            display: none; flex-direction: column; justify-content: center; 
+            align-items: center; height: 100%; padding: 50px; text-align: center;
+        }
+        .success-icon {
+            width: 110px; height: 110px;
+            background: var(--furnished-gold);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            margin-bottom: 30px; font-size: 4rem; color: #1a0505;
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .header { left: 20px; top: 20px; }
+            .header img { width: 55px; }
+            .title { font-size: 2.2rem; }
+            .welcome-text { font-size: 1.2rem; }
+            .quick-links { gap: 40px; }
+            .link-item i { font-size: 2rem; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <!-- Header Logo -->
+    <div class="header">
+        <img src="C:\Users\MSI MODERN\Downloads\logo kpu.png" alt="Logo KPU">
+        <div class="header-text">
+            <h2>KPU<br><span>PROVINSI RIAU</span></h2>
+        </div>
+    </div>
+
+    <!-- Konten Utama -->
+    <div class="main-content">
+        <i class="fas fa-university center-icon"></i>
+        
+        <p class="welcome-text">Selamat Datang di</p>
+        <h1 class="title">KPU PROVINSI RIAU</h1>
+        
+        <button class="btn-primary" onclick="openForm()">
+            <i class="fas fa-id-card" style="margin-right: 15px;"></i> Registrasi Digital
+        </button>
+
+        <div class="quick-links">
+            <a href="https://riau.kpu.go.id" target="_blank" class="link-item">
+                <i class="fas fa-paper-plane"></i>
+                <span>Portal Web</span>
+            </a>
+            <a href="https://link-survei-anda.com" target="_blank" class="link-item">
+                <i class="fas fa-star-half-alt"></i>
+                <span>E-Survei</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal Registrasi -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="floating-card">
+            <!-- Box Form -->
+            <div id="form-box" style="height: 100%; display: flex; flex-direction: column;">
+                <div style="background: var(--royal-maroon-dark); color: #fff; padding: 22px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid #af8f2c;">
+                    <span style="font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem;">Sistem Registrasi Pengunjung</span>
+                    <button onclick="closeModal()" style="background:none; border:none; color:#fff; font-size: 2.2rem; cursor:pointer;">&times;</button>
+                </div>
+                <iframe id="googleIframe" src="https://docs.google.com/forms/d/e/1FAIpQLSdI2ah1eJdnfWtoDha_IGm9fg_waAyTs6tP6b4AyzAGGLgBvQ/viewform?embedded=true" style="flex-grow:1; border:none;" onload="detectSubmit()">Loading…</iframe>
+            </div>
+            
+            <!-- Box Terima Kasih -->
+            <div id="thank-you-box">
+                <div class="success-icon"><i class="fas fa-check"></i></div>
+                <h2 style="color:#1a0505; font-weight:900; font-size:2.5rem; margin-bottom: 10px;">TERIMA KASIH</h2>
+                <p style="color:#444; font-weight: 500; margin-bottom:40px;">Data kunjungan Anda telah resmi tersimpan dalam sistem.</p>
+                <a href="javascript:void(0)" onclick="location.reload()" style="background:#1a0505; color:white; padding:18px 45px; border-radius:12px; text-decoration:none; font-weight:800; letter-spacing:1px; text-transform: uppercase;">Selesai</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logika JavaScript -->
+    <script>
+        const modal = document.getElementById('modalOverlay');
+        const formBox = document.getElementById('form-box');
+        const thankBox = document.getElementById('thank-you-box');
+        let loadCount = 0;
+
+        // Fungsi Membuka Form
+        function openForm() { 
+            modal.style.display = 'flex'; 
+        }
+
+        // Fungsi Menutup Form
+        function closeModal() { 
+            modal.style.display = 'none'; 
+        }
+        
+        // Deteksi Submit: Google Form akan reload iframe saat disubmit
+        function detectSubmit() {
+            loadCount++;
+            if(loadCount > 1) {
+                formBox.style.display = 'none';
+                thankBox.style.display = 'flex';
+            }
+        }
+
+        // Menutup modal jika area luar kartu diklik
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
